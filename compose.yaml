@@ -26,7 +26,8 @@ services:
       context: ./
       target: base
     labels:
-      - "traefik.http.routers.server.rule=Host(`kundalin.com`) && Path(`/v1/api`)"
+      - "traefik.http.routers.server.rule=Host(`kundalin.com`)"
+      - "traefik.http.routers.server.rule=Path(`/api`)"
       - "traefik.http.services.server.loadbalancer.server.port=8000"
 
 
