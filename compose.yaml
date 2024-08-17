@@ -34,7 +34,7 @@ services:
     labels:
       - "traefik.http.routers.nameof_service.rule=Host(`kundalin.com`)"
       - "traefik.http.routers.nameof_service.rule=Path(`/api`)"
-      - "traefik.http.routers.nameof_service.rule=Path(`/docs`)"
+      - "traefik.http.routers.nameof_service_doc_service.rule=Path(`/docs`)"
       - "traefik.http.routers.nameof_service.entryPoints=api"
       - "traefik.http.services.nameof_service.loadbalancer.server.port=8000"
 
