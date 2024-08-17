@@ -37,6 +37,7 @@ services:
       - "traefik.http.routers.nameof_service_doc_service.rule=Path(`/docs`)"
       - "traefik.http.routers.nameof_service.entryPoints=api"
       - "traefik.http.services.nameof_service.loadbalancer.server.port=8000"
+      - "traefik.http.services.nameof_service_doc_service.loadbalancer.server.port=8000"
 
 
 # The commented out section below is an example of how to define a PostgreSQL
