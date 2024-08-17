@@ -16,9 +16,11 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--entryPoints.api.address=:80"
+      - "--entryPoints.web-secure.address=:443" # Declares the web-secure entrypoint in Traefik
 
     ports:
       - "80:80"
+      - "443:443" #Docker sends requests on port 443 to Traefik on port 443
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -30,10 +32,10 @@ services:
       context: ./
       target: base
     labels:
-      - "traefik.http.routers.server.rule=Host(`kundalin.com`)"
-      - "traefik.http.routers.server.rule=Path(`/api`)"
-      - "traefik.http.routers.server.entryPoints=api"
-      - "traefik.http.services.server.loadbalancer.server.port=8000"
+      - "traefik.http.routers.nameof_service.rule=Host(`kundalin.com`)"
+      - "traefik.http.routers.nameof_service.rule=Path(`/api`)"
+      - "traefik.http.routers.nameof_service.entryPoints=api"
+      - "traefik.http.services.nameof_service.loadbalancer.server.port=8000"
 
 
 # The commented out section below is an example of how to define a PostgreSQL
