@@ -15,12 +15,16 @@ services:
     command: 
       - "--api.insecure=true"
       - "--providers.docker=true"
+      - "--entryPoints.api.address=:80"
 
     ports:
       - "80:80"
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+
+
   server:
     build: 
       context: ./
@@ -28,6 +32,7 @@ services:
     labels:
       - "traefik.http.routers.server.rule=Host(`kundalin.com`)"
       - "traefik.http.routers.server.rule=Path(`/api`)"
+      - "traefik.http.routers.server.entryPoints=api"
       - "traefik.http.services.server.loadbalancer.server.port=8000"
 
 
