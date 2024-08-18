@@ -1,0 +1,31 @@
+services:
+
+
+  proxy:
+    image: traefik:v3.1
+    command: 
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entryPoints.api.address=:80"
+      - "--configFile=path/to/traefik-static-config.yml"
+    configs:
+      for_traefik:
+        file: ./traefik.yaml 
+
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+
+
+  server:
+    build: 
+      context: ./
+      target: base
+    labels:
+      - "traefik.http.routers.server.rule=Host(`kundalin.com`)"
+      - "traefik.http.routers.server.rule=Path(`/api`)"
+      - "traefik.http.routers.server.entryPoints=api"
+      - "traefik.http.services.server.loadbalancer.server.port=8000"

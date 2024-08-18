@@ -1,0 +1,11 @@
+version: "3"
+services:
+  my-container:
+    # ...
+    labels:
+      - traefik.http.routers.www-router.rule=Host(`example-a.com`)
+      - traefik.http.routers.www-router.service=www-service
+      - traefik.http.services.www-service.loadbalancer.server.port=8000
+      - traefik.http.routers.admin-router.rule=Host(`example-b.com`)
+      - traefik.http.routers.admin-router.service=admin-service
+      - traefik.http.services.admin-service.loadbalancer.server.port=9000
