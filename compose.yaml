@@ -32,10 +32,11 @@ services:
       context: ./
       target: base
     labels:
-      - "traefik.http.routers.nameof_service.rule=Host(`kundalin.com`)"
-      - "traefik.http.routers.nameof_service.rule=Path(`/api`)"
-      - "traefik.http.routers.nameof_service.entryPoints=api"
-      - "traefik.http.services.nameof_service.loadbalancer.server.port=8000"
+      - "traefik.http.routers.router_rule_01.entryPoints=api"
+      - "traefik.http.routers.router_rule_01.rule=Host(`kundalin.com`) && Path(`/api`)"
+      - "traefik.http.routers.router_rule_01.service=service_01"
+      - "traefik.http.services.service_01.loadbalancer.server.port=8000"
+
 
 
 # The commented out section below is an example of how to define a PostgreSQL
