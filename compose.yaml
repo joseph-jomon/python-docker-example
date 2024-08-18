@@ -32,10 +32,10 @@ services:
       context: ./
       target: base
     labels:
-      - "traefik.http.routers.router_rule_01.entryPoints=api"
-      - "traefik.http.routers.router_rule_01.rule=Host(`kundalin.com`) && Path(`/api`)"
-      - "traefik.http.routers.router_rule_01.service=service_01"
-      - "traefik.http.services.service_01.loadbalancer.server.port=8000"
+      - "traefik.http.routers.router_rule_01.entryPoints=api" # gave name to the router(router_rule_01) and specified its entrypoint(api)
+      - "traefik.http.routers.router_rule_01.rule=Host(`kundalin.com`) && Path(`/api`)" # specified the routing rule of the router(router_rule_01)
+      - "traefik.http.routers.router_rule_01.service=service_01" # Explicit definition of a router(router_rule_01) with one service(service_01)
+      - "traefik.http.services.service_01.loadbalancer.server.port=8000" # Definition of a Service(service_01) running on the container 
 
 
 
